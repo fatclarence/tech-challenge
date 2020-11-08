@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
+import HeaderBar from '../components/HeaderBar';
 
 const Albums = () => {
     return (
         <div>
-            Albums
+            <HeaderBar />
         </div>
     )
 }
