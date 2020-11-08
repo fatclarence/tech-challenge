@@ -17,7 +17,10 @@ const UserProvider = (props) => {
         console.log("Current userID: " + storedUserId);
         setUserId(storedUserId);
         setToken(storedToken);
-        setIsAuthenticated(storedUserId === jwtVerifier(storedToken).userId);
+        if (storedUserId && storedToken) {
+            console.log("Shag");
+            setIsAuthenticated(storedUserId === jwtVerifier(storedToken).userId);
+        }
     }, [userId, token]);
 
     const setTokenFunc = (token) => {
@@ -40,7 +43,7 @@ const UserProvider = (props) => {
 
     return(
         <UserContext.Provider
-            value = {{userId, token, setTokenFunc, setUserIdFunc }}
+            value = {{isAuthenticated ,userId, token, setTokenFunc, setUserIdFunc, setIsAuthenticated }}
         >
             {props.children}
         </UserContext.Provider>

@@ -1,16 +1,17 @@
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import { ROUTES } from './Routes';
-import { Albums, Login } from '../pages/pages'
+import { Albums, Login } from '../pages/pages';
+import ProtectedRoute from './ProtectedRoute';
 
 const AppRouter = () => {
     return (
        <>
         <Switch>
             <Route path={ROUTES.LOGIN} exact component={Login}></Route>
-            <Route path={ROUTES.ALBUMS} exact component={Albums}></Route>
+            <ProtectedRoute path={ROUTES.ALBUMS} exact component={Albums}></ProtectedRoute>
         </Switch>
        </>
     )
 }
 
-export default AppRouter;
+export default withRouter(AppRouter);

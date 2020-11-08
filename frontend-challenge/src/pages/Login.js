@@ -15,6 +15,7 @@ import { Button,
 import HeaderBar from '../components/HeaderBar';
 import jwtGenerator from '../services/jwtGenerator';
 import { UserContext } from '../wrappers/UserProvider';
+import { ROUTES } from '../routes/Routes'
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,12 +41,12 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-const Login = () => {
+const Login = ({ history }) => {
     const classes = useStyles();
-    const { isAuthenticated, setUserIdFunc, setTokenFunc } = useContext(UserContext);
+    const { isAuthenticated, setUserIdFunc, setTokenFunc, setIsAuthenticated } = useContext(UserContext);
 
     const [allUsers, setAllUsers] = useState([]);
-    const [selectedUserId, setSelectedUserId] = useState("")
+    const [selectedUserId, setSelectedUserId] = useState("");
     const [isError, setIsError] = useState(false);
     
     const handleChange = (e) => {
@@ -60,11 +61,16 @@ const Login = () => {
         } else {
             setTokenFunc(jwtGenerator(selectedUserId));
             setUserIdFunc(selectedUserId);
+            setIsAuthenticated(true);
             console.log('Form submitted for ' + selectedUserId);
         }
     }
 
     useEffect(() => {
+        console.log(isAuthenticated);
+        if (isAuthenticated) {
+            history.push(ROUTES.ALBUMS);
+        }
         const getAllUsers = () => {
             axios.get("https://jsonplaceholder.typicode.com/users")
                 .then(res => {
@@ -90,7 +96,7 @@ const Login = () => {
         }
 
         getAllUsers();
-    }, []);
+    }, [isAuthenticated]);
 
     return (
         <div>
