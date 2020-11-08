@@ -1,9 +1,10 @@
 import logo from './logo.svg';
+import AppRouter from './routes/AppRouter'
 
 function App() {
   return (
     <div>
-      APP
+      <AppRouter />
     </div>
   );
 }
