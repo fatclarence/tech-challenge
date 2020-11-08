@@ -1,9 +1,12 @@
 import AppRouter from './routes/AppRouter'
+import UserProvider from './wrappers/UserProvider'
 
 function App() {
   return (
     <div>
-      <AppRouter />
+      <UserProvider>
+        <AppRouter />
+      </UserProvider>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Button,
   Paper, 
@@ -13,6 +13,8 @@ import { Button,
   NativeSelect} from '@material-ui/core';
 
 import HeaderBar from '../components/HeaderBar';
+import jwtGenerator from '../services/jwtGenerator';
+import { UserContext } from '../wrappers/UserProvider';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -40,8 +42,27 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
     const classes = useStyles();
+    const { isAuthenticated, setUserIdFunc, setTokenFunc } = useContext(UserContext);
 
     const [allUsers, setAllUsers] = useState([]);
+    const [selectedUserId, setSelectedUserId] = useState("")
+    const [isError, setIsError] = useState(false);
+    
+    const handleChange = (e) => {
+        console.log(e.target.value);
+        setSelectedUserId(e.target.value);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (selectedUserId === "") {
+            setIsError(true);
+        } else {
+            setTokenFunc(jwtGenerator(selectedUserId));
+            setUserIdFunc(selectedUserId);
+            console.log('Form submitted for ' + selectedUserId);
+        }
+    }
 
     useEffect(() => {
         const getAllUsers = () => {
@@ -63,7 +84,7 @@ const Login = () => {
                         };
                     });
 
-                    setAllUsers(fetchedData.sort((a, b) => a.username - b.username) ?? []);
+                    setAllUsers(fetchedData ?? []);
                 })
                 .catch(err => console.log("Error fetching user data", err));
         }
@@ -82,17 +103,18 @@ const Login = () => {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <form className={classes.form} noValidate>
+                    <form className={classes.form} onSubmit={handleSubmit}>
                         <div className={classes.formControl}>
                             <FormControl fullWidth>
                                 <InputLabel> Username</InputLabel>
-                                <NativeSelect>
+                                <NativeSelect onChange={handleChange}>
                                     <option value="" aria-label="None" selected="selected" />
                                     {allUsers?.map((row) => (
-                                        <option value={row.id}>{row.name}</option>
+                                        <option value={row.userId}>{row.name}</option>
                                     ))}
                                 </NativeSelect>
-                                <FormHelperText>Click box to select a User</FormHelperText>
+                                {isError ? <FormHelperText error={isError}>Please make a selection</FormHelperText>
+                                        : <FormHelperText error={isError}>Click box to select a User</FormHelperText>}
                             </FormControl>
                         </div>
                         <div className={classes.formControl}>
