@@ -8,10 +8,11 @@ import { Button,
   makeStyles, 
   Typography, 
   FormControl,
-  MenuItem,
   InputLabel,
   FormHelperText, 
   NativeSelect} from '@material-ui/core';
+
+import HeaderBar from '../components/HeaderBar';
 import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
@@ -72,6 +73,7 @@ const Login = () => {
 
     return (
         <div>
+            <HeaderBar />
             <Container component="main" maxWidth="xs">
                 <Paper className={classes.paper}>
                     <Avatar className={classes.avatar}>
