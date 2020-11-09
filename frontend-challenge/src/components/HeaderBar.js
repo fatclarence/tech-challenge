@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Link, Grid } from '@material-ui/core';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ExitToAppIcon from '@material-ui/icons/ExitToAppOutlined';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import AppButton from './AppButton';
 import { ROUTES } from '../routes/Routes';

@@ -1,8 +1,7 @@
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { ROUTES } from './Routes';
-import { Albums, Login } from '../pages/pages';
+import { Albums, Login, Photos, ErrorPage } from '../pages/pages';
 import ProtectedRoute from './ProtectedRoute';
-import Photos from '../pages/Photos';
 
 const AppRouter = () => {
     return (
@@ -11,6 +10,7 @@ const AppRouter = () => {
             <Route path={ROUTES.LOGIN} exact component={Login} />
             <ProtectedRoute path={ROUTES.ALBUMS} exact component={Albums} />
             <ProtectedRoute path={ROUTES.ALBUMS + '/:albumId' + ROUTES.PHOTOS} exact component={Photos} />
+            <Route path={ROUTES.NOT_FOUND} component={ErrorPage} />
         </Switch>
        </>
     )
