@@ -26,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const defaultFallbackImageUrl = 'https://cdn-images-1.medium.com/max/280/1*uDgQN05Lv0j-BzRBnIyUVg@2x.jpeg';
+
 const AppCard = ({ username, cardInfo, index, handleSelection }) => {
   const classes = useStyles();
   const [hovering, setHovering] = useState({
@@ -45,7 +47,7 @@ const AppCard = ({ username, cardInfo, index, handleSelection }) => {
           classes={{root: hovering.raised ? classes.cardHovered : ""}}
           onMouseOver={handleMouseOver}
           onMouseOut={handleMouseOut}
-          onClick={() => handleSelection(cardInfo.id)}
+          onClick={cardInfo.url ? () => handleSelection(cardInfo.url, cardInfo.title) : () => handleSelection(cardInfo.id)}
           raised={hovering.raised}
           zdepth={hovering.shadow}
           key={index}>
@@ -53,10 +55,10 @@ const AppCard = ({ username, cardInfo, index, handleSelection }) => {
       <CardMedia
             component="img"
             className={classes.cardMedia}
-            image={'https://cdn-images-1.medium.com/max/280/1*uDgQN05Lv0j-BzRBnIyUVg@2x.jpeg'}
+            image={cardInfo.thumbnailUrl ?? defaultFallbackImageUrl}
             title="Image title"
       />
-      <CardContent className={classes.cardContent}>
+      <CardContent>
           <Typography gutterBottom variant="h6" component="h5">
               {cardInfo.title}
           </Typography>
