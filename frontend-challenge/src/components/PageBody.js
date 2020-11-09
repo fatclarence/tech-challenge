@@ -9,8 +9,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-
-    const PageBody = ({ pageInfo, username, ...rest }) => {
+    const PageBody = ({ pageTitle, pageInfo, ...rest }) => {
         const classes = useStyles();
 
         return (
@@ -19,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
             <div className={classes.heroContent}>
                 <Container maxWidth="sm">
                     <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                        Your Albums
+                        {pageTitle}
                     </Typography>
                     <Typography variant="subtitle2" align="center" color="textPrimary" gutterBottom>
                         powered by MavenGram
@@ -27,15 +26,15 @@ const useStyles = makeStyles((theme) => ({
                 </Container>
             </div>
             <div>
-            <Container className={classes.cardGrid} maxWidth="md">
-            <Grid container spacing={4}>
-                {pageInfo.map((info, index) => (
-                <Grid item key={index} xs={12} sm={6} md={4}>
-                    <AppCard cardInfo={info} username={username} {...rest} />
-                </Grid>
-                ))}
-            </Grid>
-            </Container>
+                <Container className={classes.cardGrid} maxWidth="md">
+                    <Grid container spacing={4}>
+                        {pageInfo.map((info, index) => (
+                        <Grid item key={index} xs={12} sm={6} md={4}>
+                            <AppCard cardInfo={info} {...rest} />
+                        </Grid>
+                        ))}
+                    </Grid>
+                </Container>
             </div>
         </>
       );

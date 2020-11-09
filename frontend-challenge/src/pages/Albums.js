@@ -10,7 +10,7 @@ const Albums = ({ history }) => {
     const [albums, setAlbums] = useState([]);
 
     const handleSelectAlbum = (selectedAlbumId) => {
-        history.push(ROUTES.ALBUMS + `/:${selectedAlbumId}` + ROUTES.PHOTOS);
+        history.push(ROUTES.ALBUMS + `/${selectedAlbumId}` + ROUTES.PHOTOS);
     }
     useEffect(() => {
         const getAlbums = (userId) => {
@@ -38,7 +38,7 @@ const Albums = ({ history }) => {
     return (
         <div>
             <HeaderBar />
-            <PageBody pageInfo={albums} username={username} handleSelectAlbum={handleSelectAlbum} />
+            <PageBody pageTitle={"Your Albums"} pageInfo={albums} username={username} handleSelection={handleSelectAlbum} />
         </div>
     )
 }

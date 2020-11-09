@@ -1,8 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import HeaderBar from '../components/HeaderBar';
+import PageBody from '../components/PageBody';
+import { UserContext } from '../wrappers/UserProvider';
 
 const Photos = ({ match }) => {
+    const { username } = useContext(UserContext);
+
     const [photos, setPhotos] = useState([]);
+
+    const handleSelectImage = () => {
+        console.log("Selected Image");
+    }
 
     useEffect(() => {
         const getPhotos = (albumId) => {
@@ -17,10 +26,10 @@ const Photos = ({ match }) => {
                         } = photo;
 
                         return {
-                            photoId: id,
-                            title: title,
-                            url: url,
-                            thumbnailUrl: thumbnailUrl
+                            id,
+                            title,
+                            url,
+                            thumbnailUrl
                         };
                     });
                     console.log(fetchedPhotos);
@@ -30,6 +39,7 @@ const Photos = ({ match }) => {
         }
 
         const albumId = match.params.albumId;
+        console.log(albumId);
         
         if (albumId) {
             getPhotos(albumId);
@@ -38,7 +48,8 @@ const Photos = ({ match }) => {
 
     return (
         <div>
-            Photos
+            <HeaderBar />
+            <PageBody pageTitle={"Your Photos"} pageInfo={photos} username={username} handleSelection={handleSelectImage} />
         </div>
     )
 }

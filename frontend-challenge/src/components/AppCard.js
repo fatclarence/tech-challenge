@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const AppCard = ({ media, username, cardInfo, index, handleSelectAlbum }) => {
+const AppCard = ({ username, cardInfo, index, handleSelection }) => {
   const classes = useStyles();
   const [hovering, setHovering] = useState({
     raised: false,
@@ -45,7 +45,7 @@ const AppCard = ({ media, username, cardInfo, index, handleSelectAlbum }) => {
           classes={{root: hovering.raised ? classes.cardHovered : ""}}
           onMouseOver={handleMouseOver}
           onMouseOut={handleMouseOut}
-          onClick={() => handleSelectAlbum(cardInfo.id)}
+          onClick={() => handleSelection(cardInfo.id)}
           raised={hovering.raised}
           zdepth={hovering.shadow}
           key={index}>
