@@ -11,12 +11,13 @@ import { Button,
   InputLabel,
   FormHelperText, 
   NativeSelect} from '@material-ui/core';
+import axios from 'axios';
 
-import HeaderBar from '../components/HeaderBar';
 import jwtGenerator from '../services/jwtGenerator';
+import { HeaderBar } from '../components/components';
 import { UserContext } from '../wrappers/UserProvider';
 import { ROUTES } from '../routes/Routes'
-import axios from 'axios';
+
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -65,7 +66,6 @@ const Login = ({ history }) => {
             setUserIdFunc(selectedUserId);
             setUsernameFunc(selectedUsername);
             setIsAuthenticated(true);
-            console.log('Form submitted for ' + selectedUserId);
         }
     }
 
@@ -126,15 +126,11 @@ const Login = ({ history }) => {
                             </FormControl>
                         </div>
                         <div className={classes.formControl}>
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                className={classes.submit}
-                            >
-                                Sign In
-                            </Button>
+                            <Button type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.submit}> Sign In </Button>
                         </div>
                     </form>
                 </Paper>

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
-import HeaderBar from '../components/HeaderBar';
-import PageBody from '../components/PageBody';
-import { UserContext } from '../wrappers/UserProvider';
 import axios from 'axios';
+
+import { HeaderBar, PageBody } from '../components/components';
+import { UserContext } from '../wrappers/UserProvider';
 import { ROUTES } from '../routes/Routes';
 
 const Albums = ({ history }) => {
@@ -43,4 +43,4 @@ const Albums = ({ history }) => {
     )
 }
 
-export default Albums
+export default Albums;

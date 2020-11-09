@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Modal, Card, CardMedia, makeStyles, CardContent, Typography } from '@material-ui/core';
 
 const defaultFallbackImageUrl = 'https://cdn-images-1.medium.com/max/280/1*uDgQN05Lv0j-BzRBnIyUVg@2x.jpeg';
@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 
 const AppModal = ({ url, title, handleClose, isModalOpen }) => {
     const classes = useStyles();
-    console.log(url);
     return (
         <Modal open={isModalOpen} onClose={handleClose} aria-labelledby="photo modal" aria-describedby="modal showing your images">
             <Card className={classes.card}>
@@ -45,7 +44,7 @@ const AppModal = ({ url, title, handleClose, isModalOpen }) => {
                 </CardContent>
             </Card>
         </Modal>
-    )
+    );
 }
 
-export default AppModal
+export default AppModal;
