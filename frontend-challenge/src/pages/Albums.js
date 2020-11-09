@@ -3,13 +3,15 @@ import HeaderBar from '../components/HeaderBar';
 import PageBody from '../components/PageBody';
 import { UserContext } from '../wrappers/UserProvider';
 import axios from 'axios';
-import PhotoAlbumIcon from '@material-ui/icons/PhotoAlbum';
+import { ROUTES } from '../routes/Routes';
 
-const Albums = () => {
+const Albums = ({ history }) => {
     const { userId, username } = useContext(UserContext);
     const [albums, setAlbums] = useState([]);
-    console.log("Yo: " + userId);
-    console.log("Eh: " + username);
+
+    const handleSelectAlbum = (selectedAlbumId) => {
+        history.push(ROUTES.ALBUMS + `/:${selectedAlbumId}` + ROUTES.PHOTOS);
+    }
     useEffect(() => {
         const getAlbums = (userId) => {
             axios.get(`https://jsonplaceholder.typicode.com/albums?userId=${userId}`)
@@ -21,8 +23,8 @@ const Albums = () => {
                         } = album;
                         
                         return {
-                            albumId: id,
-                            title: title
+                            id,
+                            title
                         };
                     });
     
@@ -30,15 +32,13 @@ const Albums = () => {
                 })
                 .catch(err => console.log("Error fetch album", err));
         }
-        console.log(username);
-        console.log(userId);
         getAlbums(userId);
     }, [username, userId]);
 
     return (
         <div>
             <HeaderBar />
-            <PageBody pageInfo={albums} username={username} />
+            <PageBody pageInfo={albums} username={username} handleSelectAlbum={handleSelectAlbum} />
         </div>
     )
 }

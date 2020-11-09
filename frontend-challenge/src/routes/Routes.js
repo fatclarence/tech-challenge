@@ -1,5 +1,6 @@
 export const ROUTES = {
     LOGIN: "/", 
-    ALBUMS: "/albums", 
+    ALBUMS: "/albums",
+    PHOTOS: "/photos",
     NOT_FOUND: "*"
 }

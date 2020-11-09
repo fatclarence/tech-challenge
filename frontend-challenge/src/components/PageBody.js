@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 
-    const PageBody = ({ pageInfo, username }) => {
+    const PageBody = ({ pageInfo, username, ...rest }) => {
         const classes = useStyles();
 
         return (
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
             <Grid container spacing={4}>
                 {pageInfo.map((info, index) => (
                 <Grid item key={index} xs={12} sm={6} md={4}>
-                    <AppCard cardTitle={info.title} index={index} username={username} />
+                    <AppCard cardInfo={info} username={username} {...rest} />
                 </Grid>
                 ))}
             </Grid>

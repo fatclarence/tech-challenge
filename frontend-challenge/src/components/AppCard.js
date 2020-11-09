@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const AppCard = ({ media, username, cardTitle, index }) => {
+const AppCard = ({ media, username, cardInfo, index, handleSelectAlbum }) => {
   const classes = useStyles();
   const [hovering, setHovering] = useState({
     raised: false,
@@ -39,30 +39,31 @@ const AppCard = ({ media, username, cardTitle, index }) => {
   const handleMouseOut = () => {
       setHovering({ raised: false, shadow: 1});
   }
-  
+
   return (
     <Card className={classes.card}
           classes={{root: hovering.raised ? classes.cardHovered : ""}}
           onMouseOver={handleMouseOver}
           onMouseOut={handleMouseOut}
+          onClick={() => handleSelectAlbum(cardInfo.id)}
           raised={hovering.raised}
           zdepth={hovering.shadow}
           key={index}>
     <CardActionArea>
-    <CardMedia
-          component="img"
-          className={classes.cardMedia}
-          image={'https://cdn-images-1.medium.com/max/280/1*uDgQN05Lv0j-BzRBnIyUVg@2x.jpeg'}
-          title="Image title"
-     />
-    <CardContent className={classes.cardContent}>
-        <Typography gutterBottom variant="h6" component="h5">
-            {cardTitle}
-        </Typography>
-        <Typography variant="caption">
-          {`By @${username ?? ''}`}
-        </Typography>
-    </CardContent>
+      <CardMedia
+            component="img"
+            className={classes.cardMedia}
+            image={'https://cdn-images-1.medium.com/max/280/1*uDgQN05Lv0j-BzRBnIyUVg@2x.jpeg'}
+            title="Image title"
+      />
+      <CardContent className={classes.cardContent}>
+          <Typography gutterBottom variant="h6" component="h5">
+              {cardInfo.title}
+          </Typography>
+          <Typography variant="caption">
+            {`By @${username ?? ''}`}
+          </Typography>
+      </CardContent>
     </CardActionArea>
     </Card>
   );
