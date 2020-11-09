@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, Card, CardMedia, makeStyles, CardContent, Typography } from '@material-ui/core';
+import { Card, CardMedia, CardContent, Typography, Modal, makeStyles } from '@material-ui/core';
 
 const defaultFallbackImageUrl = 'https://cdn-images-1.medium.com/max/280/1*uDgQN05Lv0j-BzRBnIyUVg@2x.jpeg';
 

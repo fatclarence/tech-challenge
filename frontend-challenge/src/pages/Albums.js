@@ -38,7 +38,10 @@ const Albums = ({ history }) => {
     return (
         <div>
             <HeaderBar history={history} />
-            <PageBody pageTitle={"Your Albums"} pageInfo={albums} username={username} handleSelection={handleSelectAlbum} />
+            <PageBody pageTitle={"Your Albums"} 
+                      pageInfo={albums} 
+                      username={username} 
+                      handleSelection={handleSelectAlbum} />
         </div>
     )
 }

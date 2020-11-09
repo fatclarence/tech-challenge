@@ -63,7 +63,9 @@ const HeaderBar = ({ history }) => {
       <AppBar className={classes.appBarBackground} position="static">
         <Toolbar>
           {isAuthenticated ? <Grid container justify="flex-start">
-                                <AppButton handleOnClick={handleBack} startIcon={<ArrowBackIosIcon />} label={'Go Back'} />
+                                <AppButton handleOnClick={handleBack} 
+                                            startIcon={<ArrowBackIosIcon />} 
+                                            label={'Go Back'} />
                               </Grid> : null}
           <Typography variant="h6" className={classes.title}>
               <Link href={routeTo} color="inherit">

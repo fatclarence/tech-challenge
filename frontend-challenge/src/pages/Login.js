@@ -12,6 +12,7 @@ import { Button,
   FormHelperText, 
   NativeSelect} from '@material-ui/core';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 import jwtGenerator from '../services/jwtGenerator';
 import { HeaderBar } from '../components/components';
@@ -47,6 +48,7 @@ const Login = ({ history }) => {
     const { isAuthenticated, setUserIdFunc, setTokenFunc, setIsAuthenticated, setUsernameFunc } = useContext(UserContext);
 
     const [allUsers, setAllUsers] = useState([]);
+    const [fullNames, setFullNames] = useState({});
     const [selectedUserId, setSelectedUserId] = useState("");
     const [selectedUsername, setSelectedUsername] = useState(null);
     const [isError, setIsError] = useState(false);
@@ -58,14 +60,20 @@ const Login = ({ history }) => {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        if (selectedUserId === "") {
-            setIsError(true);
-        } else {
-            setTokenFunc(jwtGenerator(selectedUserId));
-            setUserIdFunc(selectedUserId);
-            setUsernameFunc(selectedUsername);
-            setIsAuthenticated(true);
+        try {
+            e.preventDefault();
+            if (selectedUserId === "") {
+                setIsError(true);
+            } else {
+                setTokenFunc(jwtGenerator(selectedUserId));
+                setUserIdFunc(selectedUserId);
+                setUsernameFunc(selectedUsername);
+                setIsAuthenticated(true);
+                const name = fullNames.get(selectedUserId);
+                toast.success(`Welcome back ${name}!`);
+            }
+        } catch (error) {
+            toast.error(error);
         }
     }
 
@@ -76,6 +84,7 @@ const Login = ({ history }) => {
         const getAllUsers = () => {
             axios.get("https://jsonplaceholder.typicode.com/users")
                 .then(res => {
+                    const usersMap = new Map();
                     const fetchedData = res.data?.map(user => {
                         const {
                             id,
@@ -83,7 +92,9 @@ const Login = ({ history }) => {
                             username,
                             email
                         } = user;
-    
+
+                        usersMap.set(JSON.stringify(id), name);
+
                         return {
                             userId: id,
                             name: name,
@@ -91,7 +102,9 @@ const Login = ({ history }) => {
                             email: email
                         };
                     });
-
+                    console.log(usersMap);
+                    setFullNames(usersMap ?? []);
+                    console.log(fullNames);
                     setAllUsers(fetchedData ?? []);
                 })
                 .catch(err => console.log("Error fetching user data", err));

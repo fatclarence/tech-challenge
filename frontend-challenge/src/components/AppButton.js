@@ -31,10 +31,7 @@ const AppButton = (props) => {
             size="large"
             className={classes.root}
             startIcon={startIcon}
-            onClick={handleOnClick}
-        >
-        {label}
-      </Button>
+            onClick={handleOnClick}>{label}</Button>
     );
 }
 

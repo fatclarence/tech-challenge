@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const JWT_SECRET_KEY = "mavennet_front_end_challenge";
 
-//  Generate jwtTokens for storing to localStorage
+// Verify jwt stored in local storage
 const jwtVerifier = (token) => {
     if (!token) {
         console.error("Token not provided");
