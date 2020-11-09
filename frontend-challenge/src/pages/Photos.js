@@ -5,7 +5,7 @@ import PageBody from '../components/PageBody';
 import { UserContext } from '../wrappers/UserProvider';
 import AppModal from '../components/AppModal';
 
-const Photos = ({ match }) => {
+const Photos = ({ history, match }) => {
     const { username } = useContext(UserContext);
 
     const [photos, setPhotos] = useState([]);
@@ -63,7 +63,7 @@ const Photos = ({ match }) => {
 
     return (
         <div>
-            <HeaderBar />
+            <HeaderBar history={history} />
             <PageBody pageTitle={"Your Photos"} pageInfo={photos} username={username} handleSelection={handleSelectImage} />
             
                 {selectedPhotoUrl && 

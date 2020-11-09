@@ -37,7 +37,7 @@ const Albums = ({ history }) => {
 
     return (
         <div>
-            <HeaderBar />
+            <HeaderBar history={history} />
             <PageBody pageTitle={"Your Albums"} pageInfo={albums} username={username} handleSelection={handleSelectAlbum} />
         </div>
     )
