@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import { CardActionArea, CardActions, Button, } from '@material-ui/core';
+import 
+{ Card, 
+  CardMedia, 
+  CardContent, 
+  CardActionArea, 
+  Typography, 
+  makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -20,9 +21,12 @@ const useStyles = makeStyles((theme) => ({
       borderBottomColor: '#5D3F6A !important',
       borderBottomStyle: 'solid',
   },
+  cardMedia: {
+    height: 140,
+  }
 }));
 
-const AppCard = ({ username, cardTitle, index }) => {
+const AppCard = ({ media, username, cardTitle, index }) => {
   const classes = useStyles();
   const [hovering, setHovering] = useState({
     raised: false,
@@ -35,6 +39,7 @@ const AppCard = ({ username, cardTitle, index }) => {
   const handleMouseOut = () => {
       setHovering({ raised: false, shadow: 1});
   }
+  
   return (
     <Card className={classes.card}
           classes={{root: hovering.raised ? classes.cardHovered : ""}}
@@ -45,27 +50,20 @@ const AppCard = ({ username, cardTitle, index }) => {
           key={index}>
     <CardActionArea>
     <CardMedia
-        className={classes.cardMedia}
-        image="https://source.unsplash.com/random"
-        title="Image title"
-    />
+          component="img"
+          className={classes.cardMedia}
+          image={'https://cdn-images-1.medium.com/max/280/1*uDgQN05Lv0j-BzRBnIyUVg@2x.jpeg'}
+          title="Image title"
+     />
     <CardContent className={classes.cardContent}>
-        <Typography gutterBottom variant="h5" component="h2">
+        <Typography gutterBottom variant="h6" component="h5">
             {cardTitle}
         </Typography>
-        <Typography>
+        <Typography variant="caption">
           {`By @${username ?? ''}`}
         </Typography>
     </CardContent>
     </CardActionArea>
-    <CardActions>
-        <Button size="small" color="primary">
-        View
-        </Button>
-        <Button size="small" color="primary">
-        Edit
-        </Button>
-    </CardActions>
     </Card>
   );
 }

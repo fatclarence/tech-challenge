@@ -19,7 +19,10 @@ const useStyles = makeStyles((theme) => ({
             <div className={classes.heroContent}>
                 <Container maxWidth="sm">
                     <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                        Album layout
+                        Your Albums
+                    </Typography>
+                    <Typography variant="subtitle2" align="center" color="textPrimary" gutterBottom>
+                        powered by MavenGram
                     </Typography>
                 </Container>
             </div>

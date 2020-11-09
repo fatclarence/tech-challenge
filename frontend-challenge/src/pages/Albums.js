@@ -3,6 +3,7 @@ import HeaderBar from '../components/HeaderBar';
 import PageBody from '../components/PageBody';
 import { UserContext } from '../wrappers/UserProvider';
 import axios from 'axios';
+import PhotoAlbumIcon from '@material-ui/icons/PhotoAlbum';
 
 const Albums = () => {
     const { userId, username } = useContext(UserContext);
