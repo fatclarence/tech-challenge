@@ -43,14 +43,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = ({ history }) => {
     const classes = useStyles();
-    const { isAuthenticated, setUserIdFunc, setTokenFunc, setIsAuthenticated } = useContext(UserContext);
+    const { isAuthenticated, setUserIdFunc, setTokenFunc, setIsAuthenticated, setUsernameFunc } = useContext(UserContext);
 
     const [allUsers, setAllUsers] = useState([]);
     const [selectedUserId, setSelectedUserId] = useState("");
+    const [selectedUsername, setSelectedUsername] = useState(null);
     const [isError, setIsError] = useState(false);
     
     const handleChange = (e) => {
-        console.log(e.target.value);
+        const selectedIndex = e.target.selectedIndex;
+        setSelectedUsername(e.target[selectedIndex].text);
         setSelectedUserId(e.target.value);
     }
 
@@ -61,13 +63,13 @@ const Login = ({ history }) => {
         } else {
             setTokenFunc(jwtGenerator(selectedUserId));
             setUserIdFunc(selectedUserId);
+            setUsernameFunc(selectedUsername);
             setIsAuthenticated(true);
             console.log('Form submitted for ' + selectedUserId);
         }
     }
 
     useEffect(() => {
-        console.log(isAuthenticated);
         if (isAuthenticated) {
             history.push(ROUTES.ALBUMS);
         }
@@ -116,7 +118,7 @@ const Login = ({ history }) => {
                                 <NativeSelect onChange={handleChange}>
                                     <option value="" aria-label="None" selected="selected" />
                                     {allUsers?.map((row) => (
-                                        <option value={row.userId}>{row.name}</option>
+                                        <option value={row.userId}>{row.username}</option>
                                     ))}
                                 </NativeSelect>
                                 {isError ? <FormHelperText error={isError}>Please make a selection</FormHelperText>

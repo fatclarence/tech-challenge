@@ -19,14 +19,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HeaderBar = ({ history }) => {
+const HeaderBar = () => {
   const classes = useStyles();
-  const { isAuthenticated, setIsAuthenticated, setUserIdFunc, setTokenFunc } = useContext(UserContext);
+  const { isAuthenticated, setIsAuthenticated, setUserIdFunc, setTokenFunc, setUsernameFunc } = useContext(UserContext);
   const [routeTo, setRouteTo] = useState('');
 
   const handleLogOut = () => {
     setUserIdFunc(null);
     setTokenFunc(null);
+    setUsernameFunc(null);
     setIsAuthenticated(false);
   }
 

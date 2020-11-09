@@ -6,11 +6,11 @@ function App() {
   const history = useHistory();
   return (
     <div>
-      <BrowserRouter history={history}>
-        <UserProvider>
-          <AppRouter />
-        </UserProvider>
-      </BrowserRouter>
+      <UserProvider>
+        <BrowserRouter history={history}>
+            <AppRouter />
+        </BrowserRouter>
+      </UserProvider>
     </div>
   );
 }
