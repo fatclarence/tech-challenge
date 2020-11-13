@@ -45,7 +45,7 @@ const Photos = ({ history, match }) => {
                     });
                     setPhotos(fetchedPhotos ?? []);
                 })
-                .catch(err => console.log("Error fetch photos", err));
+                .catch(err => console.error("Error fetch photos", err));
         }
 
         const albumId = match.params.albumId;

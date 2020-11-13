@@ -30,7 +30,7 @@ const Albums = ({ history }) => {
     
                     setAlbums(fetchedAlbums ?? []);
                 })
-                .catch(err => console.log("Error fetch album", err));
+                .catch(err => console.error("Error fetch album", err));
         }
         getAlbums(userId);
     }, [username, userId]);
