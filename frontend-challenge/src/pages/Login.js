@@ -102,12 +102,10 @@ const Login = ({ history }) => {
                             email: email
                         };
                     });
-                    console.log(usersMap);
                     setFullNames(usersMap ?? []);
-                    console.log(fullNames);
                     setAllUsers(fetchedData ?? []);
                 })
-                .catch(err => console.log("Error fetching user data", err));
+                .catch(err => console.error("Error fetching user data", err));
         }
 
         getAllUsers();
